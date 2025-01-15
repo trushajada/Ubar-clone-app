@@ -1,19 +1,12 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://0.0.0.0/ubar-clone-app') 
-  .then(() => console.log('MongoDB Connected!'))
-  .catch(err => console.error('MongoDB Connection Error:', err));
-
-const connectDB = async () => {
+const connectToDb = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://0.0.0.0/ubar-clone-app', {
-    });
-
-    console.log(`MongoDB Connected:`);
+    await mongoose.connect(process.env.MONGO_URI); 
+    console.log('MongoDB Connected to DB.JS');
   } catch (error) {
-    console.error(`Error:`);
-    process.exit(1);
+    console.error('Error connecting to DB in DB.JS:', error);
   }
-}
+};
 
-module.exports = connectDB
+module.exports = connectToDb;
