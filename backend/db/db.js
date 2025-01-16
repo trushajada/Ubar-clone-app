@@ -9,7 +9,6 @@ const connectToDb = async () => {
       // serverSelectionTimeoutMS: 5000,
       // socketTimeoutMS: 45000,
     });
-    console.log('MongoDB Connected successfully');
     
     mongoose.connection.on('connected', () => {
       console.log('MongoDB Connected successfully');
