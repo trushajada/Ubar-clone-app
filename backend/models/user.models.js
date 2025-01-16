@@ -2,7 +2,7 @@ const mongoose =require('mongoose');
 const bcrypt =require('bcrypt');
 const jwt =require('jsonwebtoken');
 
-const userSchema =new mongoose .Schema({
+const userSchema = new mongoose.Schema({
     fullname: {
         firstname: {
             type: String,
@@ -15,20 +15,20 @@ const userSchema =new mongoose .Schema({
         }
     },
     email:{
-        type:String,
-        required:true,
-        unique:true,
-        minLenght:5
+        type: String,
+        required: true,
+        unique: true,
+        minLength: 5
     },
     password:{
-        type:String,
-        required:true,
-        select:false
+        type: String,
+        required: true,
+        select: false
     },
     socketId:{
-        type:String,
+        type: String,
     }
-})
+});
 
 userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
