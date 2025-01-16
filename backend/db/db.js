@@ -10,18 +10,18 @@ const connectToDb = async () => {
             useUnifiedTopology: true
         });
         
-        console.log('✅ Connected to MongoDB Successfully!');
+        console.log(' Connected to MongoDB Successfully!');
         
         mongoose.connection.on('error', (err) => {
-            console.log('❌ MongoDB Error:', err);
+            console.log(' MongoDB Error:', err);
         });
 
         mongoose.connection.on('disconnected', () => {
-            console.log('❌ MongoDB Disconnected');
+            console.log(' MongoDB Disconnected');
         });
 
     } catch (error) {
-        console.log('❌ MongoDB Connection Error:', error.message);
+        console.log(' MongoDB Connection Error:', error.message);
         process.exit(1);
     }
 };
