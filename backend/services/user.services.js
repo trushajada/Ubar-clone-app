@@ -9,9 +9,9 @@ module.exports.createUser =async ({firstname ,lastname,email,password})=>{
         fullname:{
             firstname,
             lastname,
-
         },
         email,
         password
     })
+    return user;
 }
