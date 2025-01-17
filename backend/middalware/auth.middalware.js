@@ -1,3 +1,4 @@
+const BlacklistToken = require('../models/blacklistToken');
 const userModel = require('../models/user.models');
 const jwt = require('jsonwebtoken');
 
@@ -10,6 +11,11 @@ module.exports.authUser = async (req, res, next) => {
         if (!token) {
             console.log('No token provided');
             return res.status(401).json({ message: 'No authentication token, access denied' });
+        }
+        const isBlacklisted =await BlacklistToken.findOne({token:token});
+
+        if(isBlacklisted){
+            return res.status(401).json({message:'unauthorization'})
         }
 
         try {

@@ -2,7 +2,7 @@ const userModel =require('../models/user.models');
 const userService =require('../services/user.services');
 const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
-
+const BlacklistToken = require('../models/blacklistToken');
 
 module.exports.registerUser = async (req, res, next) => {
 
@@ -57,4 +57,21 @@ module.exports.getUserProfile = async (req, res, next) => {
 
     res.status(200).json(req.user);
 
+}
+
+module.exports.logoutUser = async (req, res) => {
+    try {
+        const token = req.cookies.token || req.headers.authorization?.split('bearer')[1]?.trim();
+        
+        // Add token to blacklist
+        await BlacklistToken.create({ token });
+        
+        // Clear the cookie - Fix the typo here
+        res.clearCookie('token');
+        
+        return res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error('Logout error:', error);
+        return res.status(500).json({ message: 'Error during logout' });
+    }
 }
