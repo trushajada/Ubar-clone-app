@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {body} =require('express-validator')
-const captionController =require('../controller/caption.controller');
+const captionController = require('../controller/caption.controller');
+const {body} = require('express-validator');
 
 
 router.post('/register', [
@@ -12,10 +12,7 @@ router.post('/register', [
     body('vehicle.plate').isLength({ min: 3 }).withMessage('Plate must be at least 3 characters long'),
     body('vehicle.capacity').isInt({ min: 1 }).withMessage('Capacity must be at least 1'),
     body('vehicle.vehicleType').isIn([ 'car', 'motorcycle', 'auto' ]).withMessage('Invalid vehicle type')
-],
-    // captainController.registerCaptain
-    
-    captionController.createCaption
-)
+]),
+captionController.registerCaptain
 
 module.exports = router;
