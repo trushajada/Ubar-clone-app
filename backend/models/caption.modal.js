@@ -24,7 +24,7 @@ const captainSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        select: false,
+        minlength: 6
     },
     socketId: {
         type: String,
@@ -76,9 +76,18 @@ captainSchema.methods.generateAuthToken = function () {
 }
 
 
-captainSchema.methods.comparePassword = async function (password) {
-    return await bcrypt.compare(password, this.password);
-}
+captainSchema.methods.comparePassword = async function(password) {
+  if (!password) {
+    throw new Error('Password is required');
+  }
+  
+  // Make sure both password and this.password exist before comparing
+  if (!this.password) {
+    throw new Error('Stored password is missing');
+  }
+
+  return await bcrypt.compare(password, this.password);
+};
 
 
 captainSchema.statics.hashPassword = async function (password) {

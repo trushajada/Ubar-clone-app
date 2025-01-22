@@ -1,6 +1,8 @@
 const BlacklistToken = require('../models/blacklistToken');
 const userModel = require('../models/user.models');
 const jwt = require('jsonwebtoken');
+const BlacklistTokenModel = require('../models/blacklistToken');
+const captionModel = require('../models/caption.modal');
 
 module.exports.authUser = async (req, res, next) => {
     try {
@@ -12,7 +14,7 @@ module.exports.authUser = async (req, res, next) => {
             console.log('No token provided');
             return res.status(401).json({ message: 'No authentication token, access denied' });
         }
-        const isBlacklisted =await BlacklistToken.findOne({token:token});
+        const isBlacklisted =await BlacklistTokenModel.findOne({token:token});
 
         if(isBlacklisted){
             return res.status(401).json({message:'unauthorization'})
@@ -44,4 +46,25 @@ module.exports.authUser = async (req, res, next) => {
     }
 }
 
-
+module.exports.authCaptain = async (req, res, next) => {
+    const token = req.cookies.token || req.headers.authorization?.split('bearer')[1]?.trim();
+    console.log(token);
+    
+    if(!token){
+        return res.status(401).json({message: 'Unauthorized'});
+    }
+    const isBlacklisted = await BlacklistTokenModel.findOne({token:token});
+    console.log(isBlacklisted);
+    
+    if(isBlacklisted){
+        return res.status(401).json({message: 'Unauthorized'});
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const caption = await captionModel.findById(decoded._id);
+        req.caption = caption;
+        return next();
+    } catch (error) {
+        return res.status(401).json({message: 'Invalid or expired token'});
+    }
+}   

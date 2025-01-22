@@ -182,6 +182,7 @@ Example:
   
 
   <!-- routescaption/register -->
+
 http://localhost:4000/caption/register
 
  {
@@ -203,4 +204,29 @@ http://localhost:4000/caption/register
         "_id": "679128a21fd4e298f376055a",
         "__v": 0
     }
+}
+
+
+  <!-- routescaption/login -->
+
+http://localhost:4000/caption/login
+{
+    "captain": {
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "vehicle": {
+            "color": "black",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        },
+        "_id": "679128a21fd4e298f376055a",
+        "email": "captain@example.com",
+        "password": "$2b$10$U1QmbB/acExQ7TfzFC4dA.jXftetwH07I9YQ/YN42eyVAr7gErbB2",
+        "status": "inactive",
+        "__v": 0
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkxMjhhMjFmZDRlMjk4ZjM3NjA1NWEiLCJpYXQiOjE3Mzc1Njg5MTcsImV4cCI6MTczNzY1NTMxN30.OQwE14guMh0z5lKgQdItThqBBZ9GnOfhpkRxjQCiJa8"
 }
