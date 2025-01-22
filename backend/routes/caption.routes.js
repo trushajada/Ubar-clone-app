@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const captionController = require('../controller/caption.controller');
 const {body} = require('express-validator');
-const authMiddleware = require('../middalware/auth.middalware');
+const {authCaptain} = require('../middalware/auth.middalware');
 // Captain registration route
 router.post('/register', [
     body('email').isEmail().withMessage('Invalid Email'),
@@ -22,7 +22,7 @@ router.post('/login',[
 captionController.loginCaptain
 )
 
-router.get('/profile', authMiddleware.authCaptain, captionController.getCaptionProfile);
-router.get('/logout', authMiddleware.authCaptain, captionController.logoutCaptain);
+router.get('/profile', authCaptain, captionController.getCaptionProfile);
+router.get('/logout', authCaptain, captionController.logoutCaptain);
 
 module.exports = router;

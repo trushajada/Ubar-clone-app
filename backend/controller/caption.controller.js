@@ -1,7 +1,6 @@
 const captionModel =require('../models/caption.modal');
 const captionService =require('../services/caption.service');
 const { validationResult } = require('express-validator');
-const BlacklistTokenModel = require('../models/blacklistToken');
 const jwt = require('jsonwebtoken');
 
 module.exports.registerCaptain = async (req, res) => {
@@ -81,10 +80,14 @@ module.exports.getCaptionProfile = async (req, res, next) => {
 module.exports.logoutCaptain = async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(' ')[ 1 ];
 
-  await BlacklistTokenModel.create({ token });
+        // Add to blacklist
+        await BlacklistTokenModel.create({ token });
+        res.clearCookie('token');
 
-  res.clearCookie('token');
+        return res.status(200).json({
 
-  res.status(200).json({ message: 'Logout successfully' });
-}
+            message: "Logged out successfully"
+        });
+
+    }
 
