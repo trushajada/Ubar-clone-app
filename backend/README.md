@@ -180,3 +180,27 @@ Example:
 }
 ```
   
+
+  <!-- routescaption/register -->
+http://localhost:4000/caption/register
+
+ {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkxMjhhMjFmZDRlMjk4ZjM3NjA1NWEiLCJpYXQiOjE3Mzc1NjYzNzAsImV4cCI6MTczNzY1Mjc3MH0.o64reZvmsCsiKHOYwoc0jRYTHyg5q5DH7GdikjmhIIo",
+    "caption": {
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "email": "captain@example.com",
+        "password": "$2b$10$U1QmbB/acExQ7TfzFC4dA.jXftetwH07I9YQ/YN42eyVAr7gErbB2",
+        "status": "inactive",
+        "vehicle": {
+            "color": "black",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        },
+        "_id": "679128a21fd4e298f376055a",
+        "__v": 0
+    }
+}
