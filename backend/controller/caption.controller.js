@@ -11,10 +11,13 @@ module.exports.registerCaptain = async (req, res ,next) => {
     const {fullname, email, password, vehicle} = req.body;
 
     const isCaptionAlready = await captionModel.findOne({email});
+    if(isCaptionAlready){
+        return res.status(400).json({message: 'Email already registered'});
+    }
 
     const hashedPassword = await captionModel.hashPassword(password);   
 
-    const caption = await captionService.createCaption({
+    const caption = await captionService.createCaptain({
         firstname: fullname.firstname,
         lastname: fullname.lastname,
         email,

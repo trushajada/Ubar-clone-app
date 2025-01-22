@@ -1,33 +1,26 @@
 const captionModel = require('../models/caption.modal');
 
-module.exports.createCaption = async ({
-    firstname,
-    color,
-    plate,
-    capacity,
-    vehicleType,
-    lastname,
-    email,
-    password,
-    vehicle
+
+module.exports.createCaptain = async ({
+    firstname, lastname, email, password, color, plate, capacity, vehicleType
 }) => {
-    if(!firstname || !color || !plate || !capacity || !vehicleType || !lastname || !email || !password || !vehicle) {
+    if (!firstname || !email || !password || !color || !plate || !capacity || !vehicleType) {
         throw new Error('All fields are required');
-}
-    const caption = await captionModel.create({
+    }
+    const captain = captionModel.create({
         fullname: {
             firstname,
             lastname
         },
         email,
         password,
-        vehicle:{
+        vehicle: {
             color,
             plate,
             capacity,
-            vehicleType 
+            vehicleType
         }
     })
 
+    return captain;
 }
-
