@@ -48,18 +48,13 @@ module.exports.authUser = async (req, res, next) => {
 
 exports.authCaptain = async (req, res, next) => {
     try {
-        // Get token from multiple sources
         let token = null;
-
-        // Check Authorization header
         const authHeader = req.headers.authorization;
         if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
             token = authHeader.split(' ')[1].trim();
         console.log(token);
 
         }
-        // Check cookies
-        
         else if (req.cookies && req.cookies.token) {
             token = req.cookies.token;
         }
@@ -79,7 +74,6 @@ exports.authCaptain = async (req, res, next) => {
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
-        // Get captain data
         const captain = await Captain.findById(decoded._id);
         if (!captain) {
             return res.status(401).json({ 
