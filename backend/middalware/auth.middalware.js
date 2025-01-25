@@ -70,8 +70,6 @@ exports.authCaptain = async (req, res, next) => {
                 message: 'No authentication token provided' 
             });
         }
-
-        // Check if token is blacklisted
         const isBlacklisted = await BlacklistToken.findOne({ token });
         if (isBlacklisted) {
             return res.status(401).json({ 
@@ -79,8 +77,6 @@ exports.authCaptain = async (req, res, next) => {
                 message: 'Token has been invalidated' 
             });
         }
-
-        // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         // Get captain data
@@ -91,8 +87,6 @@ exports.authCaptain = async (req, res, next) => {
                 message: 'Captain not found' 
             });
         }
-
-        // Attach captain and token to request
         req.captain = captain;
         req.token = token;
 
