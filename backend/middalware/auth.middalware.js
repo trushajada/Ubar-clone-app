@@ -44,7 +44,7 @@ module.exports.authUser = async (req, res, next) => {
         console.log('Auth error:', err.message);
         return res.status(401).json({ message: 'Authentication failed' });
     }
-}
+};
 
 exports.authCaptain = async (req, res, next) => {
     try {
