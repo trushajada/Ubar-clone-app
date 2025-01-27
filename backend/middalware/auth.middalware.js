@@ -74,7 +74,7 @@ exports.authCaptain = async (req, res, next) => {
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
-        const captain = await Captain.findById(decoded._id);
+        const captain = await captain.findById(decoded._id);
         if (!captain) {
             return res.status(401).json({ 
                 success: false,
@@ -83,7 +83,6 @@ exports.authCaptain = async (req, res, next) => {
         }
         req.captain = captain;
         req.token = token;
-
         next();
     } catch (error) {
         console.error('Auth error:', error);
