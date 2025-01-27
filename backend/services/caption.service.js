@@ -1,6 +1,5 @@
 const captionModel = require('../models/caption.modal');
 
-
 module.exports.createCaptain = async ({
     firstname, lastname, email, password, color, plate, capacity, vehicleType
 }) => {
@@ -21,6 +20,5 @@ module.exports.createCaptain = async ({
             vehicleType
         }
     })
-
     return captain;
 }
