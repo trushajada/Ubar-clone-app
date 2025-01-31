@@ -81,7 +81,6 @@ captainSchema.methods.comparePassword = async function(password) {
     throw new Error('Password is required');
   }
   
-  // Make sure both password and this.password exist before comparing
   if (!this.password) {
     throw new Error('Stored password is missing');
   }
